@@ -1,141 +1,606 @@
-@import url('https://fonts.googleapis.com/css2?family=Rampart+One&family=Nunito&display=swap');
-
+/* Reset and Base */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  overscroll-behavior: none;
+  scroll-behavior: smooth;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  touch-action: pan-x pan-y;
 }
 
-body, html {
-  height: 100%;
-  font-family: 'Nunito', sans-serif;
+body {
+  background: linear-gradient(to bottom right, #f0f0f0, #e0e0e0);
+  color: #111;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em;
+  top: 0;
+  z-index: 100;
+  background: transparent;
+  position: sticky;
+}
+
+.menu-icon,
+.search-icon {
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 12px;
+}
+
+.glass-icon {
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Logo section */
+.logo-scroll {
+  text-align: center;
+  margin-top: -90px;
+}
+
+.logo-scroll img {
+  width: 170px;
+  height: 190px;
+}
+
+.logo-scroll #name {
+  font-size: 25px;
+  margin-top: -50px;
+  margin-left: 15px;
+  margin-right: 15px;
+  color: #111;
+}
+
+/* Top List Section */
+.top-list-section {
+  margin-top: 0;
+  padding: 1em;
+}
+
+.top-list-section h2 {
+  font-size: 1.3em;
+  margin-bottom: 0.5em;
+  padding-left: 0.3em;
+  color: #222;
+}
+
+/* Top List Layout */
+#top-list {
+  display: flex;
+  gap: 1em;
+  overflow-x: auto;
+  padding-bottom: 1em;
+  scroll-snap-type: x mandatory;
+}
+
+#top-list .card {
+  flex: 0 0 auto;
+  width: 140px;
+  scroll-snap-align: start;
+}
+
+/* Grid Layout for Main Mod List */
+.mod-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1em;
+  padding: 1.5em;
+}
+
+/* Cards */
+.card {
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 20px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: relative;
+  padding-bottom: 2.5em;
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: scale(1.03);
+}
+
+.card img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  display: block;
+  margin: 1em auto 0 auto;
+}
+
+.card h3 {
+  font-size: 1em;
+  text-align: center;
+  padding: 0.5em;
+}
+
+/* Footer inside card (fav + stars) */
+.card-footer {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Favorite button */
+.fav-btn {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(5px);
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.fav-btn svg {
+  fill: black;
+  width: 18px;
+  height: 18px;
+}
+
+.fav-btn.fav-active svg {
+  fill: red;
+}
+
+/* Stars */
+.stars {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.stars svg {
+  fill: gold;
+  width: 16px;
+  height: 16px;
+}
+
+
+/*  */
+
+.topcontainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.topmod-card {
+  position: relative;
+  background-image: url('assets/icons/screenshots/telegram.png');
+  border-radius: 22px;
+  padding: 24px 20px 20px 20px;
+  width: 300px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
   overflow: hidden;
 }
 
-.background {
+.topmod-card .topapp-icon {
   position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 60px;
+  height: 60px;
+  border-radius: 18px;
+  padding: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.topmod-card .topapp-icon img {
   width: 100%;
   height: 100%;
-  background: url('https://wallpaperaccess.com/full/329583.jpg');
-  animation: floatBackground 60s infinite linear;
-  z-index: -1;
-  filter: brightness(0.8) saturate(1.1);
+  object-fit: contain;
 }
 
-@keyframes floatBackground {
-  0% { background-position: 0 0; }
-  100% { background-position: 1000px 1000px; }
+.topapp-info {
+  margin-top: 100px;
 }
 
-.card {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(255, 255, 255, 0.1);
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(10px);
-  padding: 40px 60px;
-  border-radius: 20px;
-  box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
-  text-align: center;
-  animation: fadeInCard 2s ease-out;
-}
-
-@keyframes fadeInCard {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -60%) scale(0.9);
-  }
-  100% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-  }
-}
-
-.title {
-  font-family: 'Rampart One', cursive;
-  font-size: 48px;
+.topapp-name {
   color: #ffffff;
-  text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
-  animation: shine 3s infinite alternate;
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
-@keyframes shine {
-  0% { text-shadow: 2px 2px 10px #fff; }
-  100% { text-shadow: 2px 2px 20px #ffe4b5, 0 0 30px #fff; }
-}
-
-.subtitle {
-  color: #f0f0f0;
-  font-size: 18px;
-  margin-top: 10px;
-  opacity: 0.9;
-}
-
-.buttons-inside {
-  margin-top: 30px;
+.topstar-rating {
   display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
+  align-items: center;
 }
 
+.topstar-rating svg {
+  width: 20px;
+  height: 20px;
+  fill: gold;
+  margin-right: 3px;
+}
 
-.btn.dark {
-  pointer-events: all;
-  background: linear-gradient(135deg, #1e1e2f, #2c2c3c);
+.topfav-btn {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(3px);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.topfav-btn svg {
+  width: 22px;
+  height: 22px;
+  fill: white;
+}
+
+.topfav-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.search-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.7);
+  padding: 12px;
+  z-index: 999;
+  transition: transform 0.4s ease;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  padding: 8px 12px;
+}
+
+.search-bar input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  background: transparent;
+}
+
+.close-search img {
+  width: 24px;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.no-results {
+  display: none;
+  text-align: center;
+  padding: 20px;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.no-results button {
+  margin-top: 10px;
+  padding: 10px 18px;
+  border-radius: 30px;
+  background: #007aff;
   color: white;
   font-weight: bold;
-  font-size: 14px;
   border: none;
-  border-radius: 30px;
-  padding: 12px 20px 12px 16px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.no-results button:hover {
+  background: #005ecb;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.search-bar-wrapper {
+  width: 100%;
+  padding: 0 16px;
+  position: absolute;
+  top: -100px;
+  left: 0;
+  z-index: 999;
+  transition: top 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+
+.search-bar-wrapper.active {
+  top: 90px;
+  /* under header */
+  opacity: 1;
+}
+
+#search-bar {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 16px;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  background: #f1f1f1;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.no-results {
+  text-align: center;
+  margin-top: 50px;
+  display: none;
+}
+
+.no-results.active {
+  display: block;
+}
+
+.telegram-btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 20px;
+  background: #007aff;
+  color: #fff;
+  border-radius: 12px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.telegram-btn:hover {
+  background: #005fd1;
+}
+
+.glass-icon {
+  transition: transform 0.3s ease;
+}
+
+footer {
+  text-align: center;
+  background-color: #fff;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 10px;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.4);
+  color: rgb(0, 0, 0);
+  font-family: 'Poppins', sans-serif;
+  flex-wrap: wrap;
+  padding: 0;
+  align-items: center;
+  text-align: center;
+}
+
+.footer-left {
   display: flex;
   align-items: center;
   gap: 8px;
-  position: relative;
-  overflow: hidden;
+  font-size: 20px;
+  padding-left: 50px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.heart {
+  width: 20px;
+  height: 20px;
+  fill: red;
+  animation: beat 1s infinite;
+}
+
+@keyframes beat {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+.footer-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0;
+}
+
+.ig-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  background-size: 300% 300%;
+  animation: iggradient 5s ease infinite;
   transition: transform 0.2s;
+  margin-left: 10px;
 }
 
-.btn.dark:active {
-  transform: scale(0.95);
+.ig-btn:hover {
+  transform: scale(1.05);
 }
 
-.icon {
+.ig-btn svg {
   width: 20px;
   height: 20px;
   fill: white;
 }
 
-.stars {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  pointer-events: none;
+.ig-btn span {
+  font-weight: bold;
+  color: white;
 }
 
-.star {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  background: white;
-  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-  opacity: 0.8;
-  animation: jump 0.6s ease forwards;
+.ig-name {
+  font-weight: bold;
+  background: -webkit-linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-@keyframes jump {
+@keyframes iggradient {
   0% {
-    transform: translate(0, 0) scale(1);
-    opacity: 1;
+    background-position: 0% 50%;
   }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
   100% {
-    transform: translate(var(--x), var(--y)) scale(0.5);
-    opacity: 0;
+    background-position: 0% 50%;
   }
+}
+
+.tg-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  background: linear-gradient(270deg, #0088cc, #00c6ff, #0088cc);
+  background-size: 400% 400%;
+  animation: tggradient 6s ease infinite;
+  transition: transform 0.2s;
+}
+
+.tg-btn:hover {
+  transform: scale(1.05);
+}
+
+.tg-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: white;
+}
+
+.tg-btn span {
+  font-weight: bold;
+  color: white;
+}
+
+@keyframes tggradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+#jf {
+  font-size: 1px;
+  margin-left: 15px;
+  margin-bottom: 5px;
+}
+
+.footer-bottom {
+  margin-top: 10px;
+  font-size: 10px;
+  text-align: center;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.glass-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  backdrop-filter: blur(10px) brightness(0.9);
+  background: rgba(255, 255, 255, 0.1);
+  /* Light glassy effect */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  align-items: center;
+  text-align: center;
+  display: none;
+  color: #fff;
+}
+
+/* Logo section */
+.logo-scroll_menu {
+  text-align: center;
+  display: block;
+}
+
+.logo-scroll_menu img {
+  width: 250px;
+  height: 250px;
+  margin-right: 65px;
+}
+
+#name_menu {
+  text-align: center;
+  align-items: center;
+  margin-right: 50px;
+  font-size: 20px;
+  margin-top: -90px;
+}
+
+#close_menu {
+  margin-top: -660px;
+  margin-left: 20px;
+}
+
+.logo-scroll_menu p {
+  margin-right: 30px;
 }
