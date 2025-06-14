@@ -202,7 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function openInstagram() {
-  const username = "itss_jus_jesse";
+  const username = "_cutest_problem_";
   const scheme = `instagram://user?username=${username}`;
   const fallback = `https://instagram.com/${username}`;
 
