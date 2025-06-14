@@ -1,0 +1,15 @@
+[
+    {
+      "id": "tg-premium",
+      "name": "Telegram Premium",
+      "icon": "/assets/icons/apps/telegram.png",
+      "bg": "/assets/icons/screenshots/telegram.png"
+    },
+    {
+      "id": "yt-premium",
+      "name": "M Premium",
+      "icon": "/assets/icons/apps/youtube.png",
+      "bg": "/assets/icons/screenshots/youtube.png"
+    }
+  ]
+  

@@ -1,0 +1,39 @@
+[
+  {
+    "id": "app1",
+    "name": "YouTube Premium",
+    "icon": "/assets/icons/apps/youtube.png",
+    "category": "Communication",
+    "version": "v10.4.2",
+    "size": "64 MB",
+    "updated": "June 2025",
+    "screenshot": "/assets/icons/screenshots/youtube.png",
+    "dw": "https://example.com/download",
+    "info": "Premium Unlocked This app gives users access to nearly all kinds of music globally, whether it’s the classics from your grandma’s time or the latest Gen Z albums, With almost every feature a music lover could need, the only drawback is that some premium features are available only with a subscription. But don’t worry you can get all the premium features with our Spotify Mod APK!"
+  },
+  {
+    "id": "app2",
+    "name": "Spotify Premium",
+    "icon": "/assets/icons/apps/spotify.png"
+  },
+  {
+    "id": "app3",
+    "name": "Telegram Premium",
+    "icon": "/assets/icons/apps/telegram.png"
+  },
+  {
+    "id": "app4",
+    "name": "YouTube Vanced",
+    "icon": "/assets/icons/apps/youtube.png"
+  },
+  {
+    "id": "app5",
+    "name": "Instagram Plus",
+    "icon": "/assets/icons/apps/instagram.png"
+  },
+  {
+    "id": "app6",
+    "name": "Minecraft PE",
+    "icon": "/assets/icons/apps/telegram.png"
+  }
+]
