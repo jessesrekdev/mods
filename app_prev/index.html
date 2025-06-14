@@ -10,7 +10,6 @@
 
 <body>
 
-  <!-- Header with search & menu icons -->
   <header class="header">
     <div class="menu-icon glass-icon">
       <img src="/assets/icons/menu.svg" alt="menu">
@@ -20,32 +19,27 @@
     </div>
   </header>
 
-  <!-- 🔍 Search Bar (hidden by default) -->
   <div class="search-bar-wrapper">
     <input type="text" id="search-bar" placeholder="Search mods..." />
   </div>
 
-  <!-- 🏷️ Logo Section -->
   <div class="logo-scroll">
     <img id="app_logo" src="/assets/icons/app_ic.png" alt="Logo" />
     <h1 id="name">Jesse Network - Unlocked - Free Android Apks</h1>
   </div>
 
-  <!-- 🔎 No Results Section -->
   <div id="no-results" class="no-results hidden">
     <p>No Results Found</p>
     <a href="https://t.me/jesse_network" class="telegram-btn" target="_blank">Check more on Telegram</a>
   </div>
 
 
-  <!-- ✅ Top List Section -->
-
   <div class="app-preview-container">
     <div class="app-header">
       <img id="ic_logo" src="/assets/icons/apps/spotify.png" alt="App Icon" class="app-icon" />
       <div class="app-info">
         <h1 id="prev_name" class="app-name">Spotify Pro</h1>
-        <button class="download-btn">Download</button>
+        <button id="firstDownloadBtn" class="download-btn">Download</button>
       </div>
     </div>
 
@@ -56,101 +50,289 @@
       </div>
     </section>
 
-<section class="mod_info">
+    <section class="mod_info">
+      <div class="mod_info">
+        <h3>Mod Info</h3>
+        <p id="info"></p>
+      </div>
+    </section>
 
-<div class="mod_info">
-      <h3>Mod Info</h3>
-      <p id="info"></p>
-</div>
-</section>
+    <section class="app-detail-section">
+      <div class="detail-left">
+        <img id="ic_logoo" src="" alt="App Icon">
+      </div>
+      <div class="detail-right">
+        <h2>Mod Details</h2>
+        <ul class="details-table">
+          <li><span>Name:</span> <span id="detail_name">Loading...</span></li>
+          <li><span>Category:</span> <span id="detail_category">Tools</span></li>
+          <li><span>Version:</span> <span id="detail_version">v1.0.0</span></li>
+          <li><span>Size:</span> <span id="detail_size">25 MB</span></li>
+          <li><span>Updated:</span> <span id="detail_updated">June 2025</span></li>
+        </ul>
+      </div>
+    </section>
 
-<section class="app-detail-section">
-  <div class="detail-left">
-    <img id="ic_logoo" src="" alt="App Icon">
-  </div>
-  <div class="detail-right">
-    <h2>Mod Details</h2>
-    <ul class="details-table">
-      <li><span>Name:</span> <span id="detail_name">Loading...</span></li>
-      <li><span>Category:</span> <span id="detail_category">Tools</span></li>
-      <li><span>Version:</span> <span id="detail_version">v1.0.0</span></li>
-      <li><span>Size:</span> <span id="detail_size">25 MB</span></li>
-      <li><span>Updated:</span> <span id="detail_updated">June 2025</span></li>
-    </ul>
-  </div>
-</section>
+    <section id="download-section">
+      <div class="download-card glassy">
+        <h2>YouTube Premium Mod</h2>
+        <button id="downloadBtn" class="download-button">Download</button>
+      </div>
+
+      <div id="animationOverlay" class="download-animation hidden">
+        <div class="glass-bubble">
+          <div class="download-icon" aria-label="Downloading">
+            <svg viewBox="0 0 24 24" width="72" height="72" stroke="currentColor" fill="none" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="8 12 12 16 16 12"></polyline>
+              <line x1="12" y1="8" x2="12" y2="15"></line>
+            </svg>
+          </div>
+          <p>Downloading...</p>
+        </div>
+      </div>
+
+      <script>
+        const firstDownloadBtn = document.getElementById('firstDownloadBtn'); // Get the first download button
+        const downloadBtn = document.getElementById('downloadBtn'); // This is your last download button
+        const animationOverlay = document.getElementById('animationOverlay'); // Renamed from 'overlay' for clarity
+
+
+        // Event listener for the FIRST download button
+        if (firstDownloadBtn && downloadBtn) {
+          firstDownloadBtn.addEventListener('click', (event) => {
+            event.preventDefault(); // Prevent default button behavior if it's inside a form or has other default actions
+            downloadBtn.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start' // Scrolls the element to the top of the viewport
+            });
+          });
+        }
+
+
+        // Event listener for the LAST download button (your existing animation logic)
+        if (downloadBtn && animationOverlay) {
+            downloadBtn.addEventListener('click', () => {
+                animationOverlay.classList.remove('hidden');
+
+                // Optional: start actual download here
+                // window.location.href = 'your_apk_url.apk';
+
+                // Hide animation after 2.5s
+                setTimeout(() => {
+                    animationOverlay.classList.add('hidden');
+                }, 2500);
+            });
+        }
+      </script>
+
+      <style>
+        /* ---------- NEW download icon animation ---------- */
+        .download-icon {
+          color: #4e54c8;
+          /* same purple‑blue as button for harmony */
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-bottom: 10px;
+        }
+
+        /* Animate the <svg> itself */
+        .download-icon svg {
+          animation: downloadBounce 1s ease-in-out infinite alternate;
+        }
+
+        /* Keyframes: subtle 8px vertical motion */
+        @keyframes downloadBounce {
+          0% {
+            transform: translateY(-4px);
+          }
+
+          100% {
+            transform: translateY(4px);
+          }
+        }
+
+        /* Glassy Effect Base */
+        .glassy {
+          background: rgba(255, 255, 255, 0.2);
+          backdrop-filter: blur(16px);
+          border-radius: 20px;
+          padding: 2rem;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+          color: #111;
+          text-align: center;
+          font-family: 'Segoe UI', 'San Francisco', sans-serif;
+          border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Download Card Section */
+        #download-section {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 20px;
+          height: 50vh;
+          background: linear-gradient(135deg, #7b87aa, #ffffff);
+          /* Light gradient background */
+        }
+
+        /* Button */
+        .download-button {
+          margin-top: 20px;
+          padding: 12px 30px;
+          font-size: 1.1rem;
+          background: linear-gradient(135deg, #4e54c8, #8f94fb);
+          border: none;
+          border-radius: 999px;
+          color: white;
+          font-weight: 600;
+          cursor: pointer;
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .download-button:hover {
+          transform: scale(1.05);
+          box-shadow: 0 4px 20px rgba(79, 114, 252, 0.4);
+        }
+
+        /* Animation Overlay */
+        .download-animation {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          backdrop-filter: blur(18px);
+          background: rgba(255, 255, 255, 0.2);
+          z-index: 9999;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          animation: fadeIn 0.3s ease forwards;
+        }
+
+        .hidden {
+          display: none;
+        }
+
+        /* Bubble Notification */
+        .glass-bubble {
+          background: rgba(255, 255, 255, 0.25);
+          padding: 30px 50px;
+          border-radius: 30px;
+          text-align: center;
+          animation: popIn 0.4s ease;
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+          color: #222;
+          font-weight: 500;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+
+          to {
+            opacity: 1;
+          }
+        }
+
+        @keyframes popIn {
+          0% {
+            transform: scale(0.8);
+            opacity: 0;
+          }
+
+          100% {
+            transform: scale(1);
+            opacity: 1;
+          }
+        }
+
+        @keyframes fadeOut {
+          to {
+            opacity: 0;
+          }
+        }
+      </style>
+    </section>
+
 
 
   </div>
 
   <style>
+    .app-detail-section {
+      display: flex;
+      flex-wrap: wrap;
+      background: #f9f9f9;
+      border-radius: 20px;
+      padding: 30px;
+      margin: 30px 0;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+      align-items: center;
+    }
 
-.app-detail-section {
-  display: flex;
-  flex-wrap: wrap;
-  background: #f9f9f9;
-  border-radius: 20px;
-  padding: 30px;
-  margin: 30px 0;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
-  align-items: center;
-}
+    .detail-left {
+      flex: 1 1 250px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+    }
 
-.detail-left {
-  flex: 1 1 250px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 20px;
-}
+    .detail-left img {
+      width: 150px;
+      height: 150px;
+      border-radius: 30px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      object-fit: cover;
+    }
 
-.detail-left img {
-  width: 150px;
-  height: 150px;
-  border-radius: 30px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  object-fit: cover;
-}
+    .detail-right {
+      flex: 2 1 400px;
+      padding-left: 30px;
+    }
 
-.detail-right {
-  flex: 2 1 400px;
-  padding-left: 30px;
-}
+    .detail-right h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
 
-.detail-right h2 {
-  font-size: 24px;
-  margin-bottom: 20px;
-  font-weight: 600;
-}
+    .details-table {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
 
-.details-table {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
+    .details-table li {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      font-size: 16px;
+      border-bottom: 1px solid #eee;
+    }
 
-.details-table li {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 0;
-  font-size: 16px;
-  border-bottom: 1px solid #eee;
-}
+    .details-table span:first-child {
+      color: #777;
+      font-weight: 500;
+    }
 
-.details-table span:first-child {
-  color: #777;
-  font-weight: 500;
-}
-
-.details-table span:last-child {
-  font-weight: 600;
-  color: #333;
-}
-
+    .details-table span:last-child {
+      font-weight: 600;
+      color: #333;
+    }
 
     .mod_info {
       margin-top: 20px;
     }
+
     .app-preview-container {
       max-width: 600px;
       margin: 20px auto;
@@ -235,60 +417,19 @@
 
 
 
-  <!-- 📱 Main Mod Grid -->
   <main class="mod-grid" id="mod-list"></main>
 
-
-  <!--Footer-->
-  <!-- <footer class="footer" id="footer">
-  <div class="footer-left">
-    <span>Made with</span>
-    <svg class="heart" viewBox="0 0 24 24">
-      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
-               2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 
-               4.5 2.09C13.09 3.81 14.76 3 16.5 3
-               19.58 3 22 5.42 22 8.5c0 3.78-3.4 
-               6.86-8.55 11.54L12 21.35z"/>
-    </svg> by <br>
-    <div class="ig-name">Jesse Srek</div>
-  </div>
-  <h1 id="jf">Join Us for more</h1>
-
-  <div class="footer-right">
-    <div class="ig-btn" onclick="openInstagram()">
-      <svg viewBox="0 0 448 512">
-        <path d="M224,202a53,53,0,1,0,53,53A53,53,0,0,0,224,202Zm124-41a20,20,0,1,1,20-20A20,20,0,0,1,348,161ZM224,120c58.36,0,64.57.22,87.35,1.26a89.41,89.41,0,0,1,30.14,5.61,53.45,53.45,0,0,1,19.52,12.8,53.45,53.45,0,0,1,12.8,19.52,89.41,89.41,0,0,1,5.61,30.14c1,22.78,1.26,28.99,1.26,87.35s-.22,64.57-1.26,87.35a89.41,89.41,0,0,1-5.61,30.14,53.45,53.45,0,0,1-12.8,19.52,53.45,53.45,0,0,1-19.52,12.8,89.41,89.41,0,0,1-30.14,5.61c-22.78,1-28.99,1.26-87.35,1.26s-64.57-.22-87.35-1.26a89.41,89.41,0,0,1-30.14-5.61A53.45,53.45,0,0,1,86.06,433a53.45,53.45,0,0,1-12.8-19.52,89.41,89.41,0,0,1-5.61-30.14C66.63,360.57,66.41,354.36,66.41,296S66.63,231.43,67.67,208.65a89.41,89.41,0,0,1,5.61-30.14,53.45,53.45,0,0,1,12.8-19.52,53.45,53.45,0,0,1,19.52-12.8,89.41,89.41,0,0,1,30.14-5.61C159.43,120.22,165.64,120,224,120m0-40C165.29,80,158.69,80.24,135.78,81.27a129.55,129.55,0,0,0-42.19,8.25A93.31,93.31,0,0,0,56.48,112.1,93.31,93.31,0,0,0,33.06,138.59a129.55,129.55,0,0,0-8.25,42.19C24.24,203.31,24,209.91,24,268.62s.24,65.31,1.27,88.22a129.55,129.55,0,0,0,8.25,42.19A93.31,93.31,0,0,0,56.48,439.9a93.31,93.31,0,0,0,26.48,23.42,129.55,129.55,0,0,0,42.19,8.25c22.91,1,29.51,1.27,88.22,1.27s65.31-.24,88.22-1.27a129.55,129.55,0,0,0,42.19-8.25A93.31,93.31,0,0,0,391.52,439.9a93.31,93.31,0,0,0,23.42-26.48,129.55,129.55,0,0,0,8.25-42.19c1-22.91,1.27-29.51,1.27-88.22s-.24-65.31-1.27-88.22a129.55,129.55,0,0,0-8.25-42.19A93.31,93.31,0,0,0,391.52,112.1a93.31,93.31,0,0,0-26.48-23.42,129.55,129.55,0,0,0-42.19-8.25C288.69,80.24,282.09,80,224,80Z"/>
-      </svg>
-      <span>Instagram</span>
-    </div>
-    <div class="tg-btn" onclick="openTelegram()">
-  <svg viewBox="0 0 496 512">
-    <path d="M248,8C111.033,8,0,119.033,0,256s111.033,248,248,248s248-111.033,248-248S384.967,8,248,8z M371.2,169.418
-      l-49.93,234.267c-3.733,16.821-13.653,20.971-27.697,13.061l-76.608-56.499l-36.929,35.555c-4.088,4.088-7.488,7.488-15.322,7.488
-      l5.479-77.483l141.206-127.434c6.133-5.479-1.342-8.547-9.497-3.067L150.301,293.87l-75.136-23.483
-      c-16.346-5.088-16.699-16.346,3.443-24.166l294.857-113.019C377.9,127.434,387.667,135.943,371.2,169.418z"/>
-  </svg>
-  <span>Telegram</span>
-</div>
-  </div>
-
-  <div class="footer-bottom">
-    To Request android apps to be published here join our Telegram channeland request from the discussion group
-  </div>
-</footer> -->
 
   <div id="glassOverlay" class="glass-overlay">
     <div id="close_menu" class="menu-icon glass-icon">
       <img id="app_menu_ic" src="/assets/icons/close.svg" alt="close menu">
     </div>
-    <!-- 🏷️ Logo Section -->
     <div class="logo-scroll_menu">
       <img id="app_logo_menu" src="/assets/icons/app_ic.png" alt="Logo" />
       <h1 id="name_menu">Jesse Network - Unlocked - Free Android Apks</h1>
     </div>
   </div>
 
-  <!-- JavaScript Logic -->
   <script src="/app_preview.js"></script>
 
 </body>
