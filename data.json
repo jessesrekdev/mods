@@ -20,21 +20,7 @@
   {
     "id": "app3",
     "name": "Telegram Premium",
-    "icon": "/assets/icons/apps/telegram.png"
-  },
-  {
-    "id": "app4",
-    "name": "YouTube Vanced",
-    "icon": "/assets/icons/apps/youtube.png"
-  },
-  {
-    "id": "app5",
-    "name": "Instagram Plus",
-    "icon": "/assets/icons/apps/instagram.png"
-  },
-  {
-    "id": "app6",
-    "name": "Minecraft PE",
-    "icon": "/assets/icons/apps/telegram.png"
+    "icon": "/assets/icons/apps/telegram.png",
+    "screenshot": "/assets/icons/screenshots/telegram.png"
   }
 ]
