@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     favBtn.dataset.id = app.id;
     card.dataset.id = app.id;
 
+
     if (favs.includes(app.id)) {
       favBtn.classList.add('fav-active');
     }
@@ -108,7 +109,11 @@ document.addEventListener('DOMContentLoaded', () => {
           // Find app data from global arrays
           const app = globalModData.find(a => a.id === id) || globalTopData.find(a => a.id === id);
 
-          if (app) {
+
+          if (app.goto && app.goto.trim() !== "") {
+            // If 'goto' exists and is not empty, redirect
+            window.location.href = app.goto;
+          } else if (app) {
             localStorage.setItem('prev_data', JSON.stringify({
               name: app.name,
               icon: app.icon,
@@ -202,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function openInstagram() {
-  const username = "_cutest_problem_";
+  const username = "itss_jus_jesse";
   const scheme = `instagram://user?username=${username}`;
   const fallback = `https://instagram.com/${username}`;
 
