@@ -1,44 +1,223 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jesse Network</title>
-  <link rel="stylesheet" href="welcome/style.css" />
-    <script src="welcome/script.js"></script>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="initial-scale=1.0, maximum-scale=5.0, width=device-width">
-  <meta name='robots' content='index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1' />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jesse Network - Mod APK Store</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  body {font-family: Arial,sans-serif; margin:0; padding:0; background:#f3f4f6; overflow-x:hidden;}
+  header {background:#1a1a1a; color:#fff; padding:20px; text-align:center; position:sticky; top:0; z-index:10;}
+  h1 {margin:0;}
+
+  .store {max-width:1000px; margin:80px auto 120px auto; padding:20px; display:flex; flex-direction:column; gap:20px; transition:opacity .3s;}
+
+  .app-card {
+    background:#fff;
+    display:flex;
+    align-items:center;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+    transition:transform .2s;
+    gap:20px;
+  }
+  .app-card:hover {transform:scale(1.02);}
+  
+  .app-icon img {width:80px; height:80px; border-radius:20%; object-fit:cover; flex-shrink:0;}
+  .app-info {flex:1;}
+  .app-info h2 {margin:0 0 10px 0; font-size:20px; color:#111;}
+  .app-info p {margin:0 0 15px 0; color:#555; font-size:14px; line-height:1.4;}
+  .app-info a {
+    display:inline-block;
+    background:#1a1a1a;
+    color:#fff;
+    padding:8px 16px;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:bold;
+    transition:background .2s;
+  }
+  .app-info a:hover {background:#333;}
+
+  /* ===== Glassy Bottom Nav ===== */
+  .bottom-nav {
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(10px);
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    padding:10px 0;
+    border-top:1px solid rgba(255,255,255,0.3);
+    z-index:20;
+  }
+  .bottom-nav button {
+    background:none;
+    border:none;
+    color:#111;
+    font-size:16px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    cursor:pointer;
+    transition:all .2s;
+  }
+  .bottom-nav button i {font-size:20px; margin-bottom:4px;}
+  .bottom-nav button:hover {color:#1a1a1a; transform:scale(1.1);}
+  .bottom-nav button.active {color:#1a1a1a; font-weight:bold;}
+
+  /* ===== Search Overlay ===== */
+  .search-overlay {
+    position:fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background:rgba(255,255,255,0.95);
+    backdrop-filter:blur(12px);
+    display:none;
+    flex-direction:column;
+    padding:80px 20px 20px 20px;
+    z-index:30;
+    overflow-y:auto;
+  }
+  .search-overlay.active {display:flex; animation:fadeIn .3s;}
+  .search-bar {display:flex; align-items:center; gap:10px; margin-bottom:20px; position:relative;}
+  .search-bar input {
+    flex:1;
+    padding:10px 15px;
+    font-size:16px;
+    border-radius:12px;
+    border:1px solid #ccc;
+    outline:none;
+    transition:all .3s;
+  }
+  .search-bar i {font-size:20px; color:#555; cursor:pointer;}
+
+  .search-results {display:flex; flex-direction:column; gap:15px;}
+  .no-results {text-align:center; margin-top:40px; color:#555;}
+  .no-results svg {width:100px; height:100px; opacity:0.4; margin-bottom:20px;}
+  .action-buttons {display:flex; justify-content:center; gap:20px; margin-top:20px;}
+  .action-buttons button {
+    background:#1a1a1a;
+    color:#fff;
+    border:none;
+    padding:10px 20px;
+    border-radius:12px;
+    cursor:pointer;
+    transition:all .2s;
+  }
+  .action-buttons button:hover {background:#333;}
+
+  @keyframes fadeIn {from {opacity:0;} to {opacity:1;}}
+</style>
 </head>
-
 <body>
-  <div class="background"></div>
-  <div class="card">
-    <h1 class="title">Jesse Network</h1>
-    <p class="subtitle">Everything made simple easy and free</p>
-    <div class="buttons-inside">
-      <button class="btn dark" onclick="goToSite(event)">
-        <svg class="icon" viewBox="0 0 24 24">
-          <path fill="white" d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-        </svg>
-        Continue to Site
-        <span class="stars"></span>
-      </button>
 
-      <button class="btn dark" onclick="goToTelegram(event)">
-        <svg class="icon" viewBox="0 0 24 24">
-          <path fill="white"
-            d="M9.04 15.2l-.38 3.73c.54 0 .78-.23 1.07-.51l2.57-2.43 5.33 3.91c.98.54 1.68.26 1.94-.9l3.52-16.56c.33-1.56-.56-2.17-1.58-1.79L1.43 9.84c-1.51.58-1.49 1.4-.27 1.77l5.35 1.67L19.36 6.4c.44-.27.85-.12.52.18" />
-        </svg>
-        Join Community
-        <span class="stars"></span>
-      </button>
-    </div>
+<header>
+  <h1>Jesse Network Mod APK Store</h1>
+</header>
 
+<section class="store" id="appsContainer">
+  <!-- Apps will load here -->
+</section>
+
+<!-- ===== Search Overlay ===== -->
+<div class="search-overlay" id="searchOverlay">
+  <div class="search-bar">
+    <i class="fas fa-arrow-left" id="closeSearch"></i>
+    <input type="text" placeholder="Search apps..." id="searchInput">
+    <i class="fas fa-search"></i>
   </div>
+  <div class="search-results" id="searchResults"></div>
+  <div class="no-results" id="noResults" style="display:none;">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L16.25 10.5M16.25 17L9.75 10.5M12 21c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8z"/>
+    </svg>
+    <div>No results found</div>
+    <div class="action-buttons">
+      <button onclick="window.open('https://t.me/jesse_network','_blank')">Join us on Telegram</button>
+      <button onclick="window.location.href='https://jesse-network.xo.je'">Go to main Site</button>
+    </div>
+  </div>
+</div>
 
+<!-- ===== Bottom Nav ===== -->
+<div class="bottom-nav">
+  <button class="active"><i class="fas fa-home"></i>Home</button>
+  <button><i class="fas fa-chart-line"></i>Top</button>
+  <button><i class="fas fa-star"></i>For You</button>
+  <button id="openSearch"><i class="fas fa-search"></i>Search</button>
+</div>
+
+<script>
+// ===== Fetch Apps =====
+async function fetchApps() {
+  try {
+    const res = await fetch("https://jesse-network.xo.je/wp-json/wp/v2/posts?per_page=20&_fields=id,link,meta");
+    const posts = await res.json();
+    renderApps(posts, 'appsContainer');
+  } catch (err) {
+    document.getElementById("appsContainer").innerHTML = "<p>Could not load apps.</p>";
+    console.error(err);
+  }
+}
+
+// ===== Render App Cards =====
+function renderApps(posts, containerId) {
+  let html = "";
+  posts.forEach(post => {
+    const appName  = post.meta?.name || "Unknown App";
+    const appAbout = post.meta?.about || "No description available.";
+    const appIcon  = post.meta?.icon || "https://via.placeholder.com/80";
+
+    html += `
+      <div class="app-card">
+        <div class="app-icon">
+          <img src="${appIcon}" alt="${appName}">
+        </div>
+        <div class="app-info">
+          <h2>${appName}</h2>
+          <p>${appAbout}</p>
+          <a href="${post.link}" target="_blank">Get Mod</a>
+        </div>
+      </div>
+    `;
+  });
+  document.getElementById(containerId).innerHTML = html;
+}
+
+// ===== Search Overlay =====
+const searchOverlay = document.getElementById('searchOverlay');
+const searchInput = document.getElementById('searchInput');
+const searchResults = document.getElementById('searchResults');
+const noResults = document.getElementById('noResults');
+
+document.getElementById('openSearch').addEventListener('click',()=>searchOverlay.classList.add('active'));
+document.getElementById('closeSearch').addEventListener('click',()=>searchOverlay.classList.remove('active'));
+
+// ===== Live Search =====
+searchInput.addEventListener('input', async function(){
+  const query = this.value.trim().toLowerCase();
+  if(!query) { searchResults.innerHTML=''; noResults.style.display='none'; return; }
+  try {
+    const res = await fetch("https://jesse-network.xo.je/wp-json/wp/v2/posts?per_page=50&_fields=id,link,meta");
+    const posts = await res.json();
+    const filtered = posts.filter(post => (post.meta?.name||"").toLowerCase().includes(query));
+    if(filtered.length>0){
+      renderApps(filtered,'searchResults');
+      noResults.style.display='none';
+    } else {
+      searchResults.innerHTML='';
+      noResults.style.display='block';
+    }
+  } catch(err){ console.error(err); }
+});
+
+fetchApps();
+</script>
 
 </body>
-
 </html>
